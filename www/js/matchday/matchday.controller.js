@@ -7,23 +7,42 @@
 	function MatchdayCtrl($ionicPlatform, dataservice) {
 		var vm = this;
 		vm.datas = [];
+		vm.weeks = [];
+		vm.currentWeek = null;
+
+		vm.changeWeek = changeWeek;
 
 		activate();
 		function activate() {
-			fetchMatchdays();
+			fetchPageData();
 		};
 
-		function setUpMatchdays() {
+		function changeWeek(value) {
+			var newValue = vm.currentWeek + value;
+			if (newValue < 1) {
+				newValue = 1;
+			} else if (newValue > vm.weeks.length) {
+				newValue = vm.weeks.length;
+			}
+			vm.currentWeek = newValue;
+			dataservice.fetchMatchday(vm.currentWeek).then(processMatchData);
 		}
 
-		function fetchMatchdays() {
-			dataservice.fetchMatchdays().then(processMatchdays);
+		function processMatchData(result) {
+			if (200 === result.status) {
+				vm.datas = result.data.model;
+			}
 		}
 
-		function processMatchdays(result) {
+		function fetchPageData() {
+			dataservice.fetchPageData('matchday').then(processPageData);
+		}
+
+		function processPageData(result) {
 			if (200 === result.status) {
 				vm.datas = result.data.matchdayModelView.model;
-				setUpMatchdays();
+				vm.currentWeek = parseInt(result.data.matchdayModelView.week.weekNumber);
+				vm.weeks = result.data.weeks;
 			}
 		};
 	};

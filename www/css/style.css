@@ -10,5 +10,9 @@
 }
 
 .epl-ranks .firstelement {
-	padding-top: 20px;
+	padding-top: 40px;
+}
+
+.epl-matchday .firstelement {
+	padding-top: 40px;
 }

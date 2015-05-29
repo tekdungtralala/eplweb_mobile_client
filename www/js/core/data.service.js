@@ -12,7 +12,7 @@
 		var service = {
 			fetchPageData: fetchPageData,
 			fetchRanks: fetchRanks,
-			fetchMatchdays: fetchMatchdays
+			fetchMatchday: fetchMatchday
 		};
 		return service;
 
@@ -26,8 +26,10 @@
 			return fetchData("GET", path);
 		}
 
-		function fetchMatchdays() {
-			return fetchData("GET", "/api/page/matchday");
+		function fetchMatchday(weekNumber) {
+			var path = "/api/matchday";
+			if (weekNumber) path = path + "/" + weekNumber;
+			return fetchData("GET", path);
 		}
 
 		function fetchData(method, path) {

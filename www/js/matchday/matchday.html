@@ -1,5 +1,16 @@
-<ion-view view-title="Matchday">
+<ion-view view-title="Matchday" class="epl-matchday">
 	<ion-content>
+
+		<div class="bar bar-header">
+			<button class="button icon ion-chevron-left"
+				ng-click="vm.changeWeek(-1)"></button>
+			<h1 class="title">Week : {{vm.currentWeek}}</h1>
+			<button class="button icon ion-chevron-right"
+				ng-click="vm.changeWeek(1)"></button>
+		</div>
+
+		<div class="firstelement"/>
+
 		<div ng-repeat="(i, days) in vm.datas">
 			<div class="row" >
 				<div class="col">{{i}}</div>
@@ -9,7 +20,11 @@
 				<div class="col col-40 epl-center">
 					<img class='epl-team-logo' alt='' 
 						ng-src='img/logo/150x150/{{r.homeTeam.id}}.png' />
-					{{r.homeGoal}} - {{r.awayGoal}}
+					<span ng-if="r.homeGoal > -1">{{r.homeGoal}}</span>
+					<span ng-if="r.homeGoal == -1">&nbsp;</span>
+					 - 
+					<span ng-if="r.awayGoal > -1">{{r.awayGoal}}</span>
+					<span ng-if="r.awayGoal == -1">&nbsp;</span>
 					<img class='epl-team-logo' alt='' 
 						ng-src='img/logo/150x150/{{r.awayTeam.id}}.png' />
 				</div>
