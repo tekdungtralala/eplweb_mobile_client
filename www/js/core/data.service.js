@@ -6,17 +6,24 @@
 
 	function Dataservice($q, $http, $rootScope) {
 		var ADDRESS_URL = "localhost";
-		ADDRESS_URL = "10.42.0.1";
+		ADDRESS_URL = "162.220.10.249";
 		var API_URL = "http://" + ADDRESS_URL + ":8080/eplweb";
 
 		var service = {
+			fetchPageData: fetchPageData,
 			fetchRanks: fetchRanks,
 			fetchMatchdays: fetchMatchdays
 		};
 		return service;
 
-		function fetchRanks() {
-			return fetchData("GET", "/api/ranks");
+		function fetchPageData(page) {
+			return fetchData("GET", "/api/page/" + page);
+		}
+
+		function fetchRanks(weekNumber) {
+			var path = "/api/ranks";
+			if (weekNumber) path = path + "/" + weekNumber;
+			return fetchData("GET", path);
 		}
 
 		function fetchMatchdays() {

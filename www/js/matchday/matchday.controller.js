@@ -14,7 +14,6 @@
 		};
 
 		function setUpMatchdays() {
-			console.log("_ : ", _)
 		}
 
 		function fetchMatchdays() {
