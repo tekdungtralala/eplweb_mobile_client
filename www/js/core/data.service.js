@@ -4,9 +4,10 @@
 		.module("app.core")
 		.factory("dataservice", Dataservice);
 
-	function Dataservice($q, $http, $rootScope) {
+	function Dataservice($q, $http, $rootScope, $ionicLoading) {
 		var ADDRESS_URL = "localhost";
 		ADDRESS_URL = "162.220.10.249";
+		ADDRESS_URL = "weekendmatch.info";
 		var API_URL = "http://" + ADDRESS_URL + ":8080/eplweb";
 
 		var service = {
@@ -37,11 +38,22 @@
 				method: method,
 				url: API_URL + path
 			};
+			showLoading();
 			return $http(req).then(getResult);
 		}
 
+		function showLoading() {
+			$ionicLoading.show({
+				template: '<ion-spinner icon="android"></ion-spinner>'
+			});
+		}
+
+		function hideLoading() {
+			$ionicLoading.hide();
+		}
 
 		function getResult(result) {
+			hideLoading();
 			return result;
 		}
 

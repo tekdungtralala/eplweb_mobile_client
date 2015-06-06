@@ -10,7 +10,8 @@
 				url: "/home",
 				views: {
 					'menuContent': {
-						templateUrl: "js/home/home.html"
+						templateUrl: "js/home/home.html",
+						controller: 'HomeCtrl as vm'
 					}
 				}
 			});
