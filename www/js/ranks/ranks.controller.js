@@ -5,6 +5,26 @@
 		.controller('RanksCtrl', RanksCtrl);
 
 	function RanksCtrl(dataservice) {
+
+		
+		
+		var fbLoginSuccess = function (userData) {
+		    console.log("userData : ", userData);
+		}
+		var fbLoginError = function (a, b, c, d, e) {
+			console.log("a : ", a);
+			console.log("b : ", b);
+			console.log("c : ", c);
+			console.log("d : ", d);
+			console.log("e : ", e);
+		}
+		console.log("facebookConnectPlugin : ", facebookConnectPlugin);
+		facebookConnectPlugin.login(["public_profile"],
+		    fbLoginSuccess,
+		    fbLoginError
+		);
+
+
 		var vm = this;
 		vm.datas = [];
 		vm.weeks = [];
