@@ -2,23 +2,20 @@
 	"use strict";
 
 	angular.module('app', [
-		'ionic', 
+		'ionic',
 		'app.core',
 		'app.home',
 		'app.matchday',
 		'app.ranks',
+		'app.user',
 		'app.controllers'
 	])
 	.run(appRun)
 	.config(configuration);
 
-	function appRun($ionicPlatform, $ionicSideMenuDelegate) {
+	function appRun($ionicPlatform, $ionicSideMenuDelegate, $rootScope, dataservice) {
+
 		$ionicPlatform.ready(function() {
-			// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-			// for form inputs)
-			if (window.cordova && window.cordova.plugins.Keyboard) {
-				cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-			}
 			if (window.StatusBar) {
 				// org.apache.cordova.statusbar required
 				// StatusBar.styleDefault();
@@ -30,8 +27,12 @@
 					event.preventDefault();
 				}
 			});
-
 		});
+
+		$rootScope.socialSignin = function (socialType) {
+			dataservice.socialMediaSignin(socialType);
+		}
+		
 	};
 
 	function configuration($stateProvider, $urlRouterProvider) {
@@ -43,7 +44,7 @@
 				url: "/app",
 				abstract: true,
 				templateUrl: "templates/menu.html",
-				controller: 'AppCtrl'
+				controller: 'AppCtrl as vm'
 			})
 			.state('app.search', {
 				url: "/search",

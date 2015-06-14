@@ -1,0 +1,28 @@
+<div class="list">
+	<div class="item ">
+		<h2>User Sign Up</h2>
+		<br/>
+		<div class="wm-nowrap">
+		Hai {{vm.userModel.firstName}} {{vm.userModel.lastName}}, welcome into Weekend Match app.
+		<br/>
+		Need to complete one more step before using this site.
+		</div>
+	</div>
+	<div class="item item-input-inset">
+		<label class="item-input-wrapper">
+			<input 
+				ng-model="vm.username"
+				type="text" placeholder="Username">
+		</label>
+		<button class="button button-small button-positive"
+			ng-click="vm.presave()">
+			Submit
+		</button>
+	</div>
+	<div 
+		ng-if="vm.errorMsg"
+		class="item wm-errormsg">
+		{{vm.errorMsg}}
+	</div>
+</div>
+

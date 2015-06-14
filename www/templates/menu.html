@@ -14,10 +14,35 @@
 
 	<ion-side-menu side="left">
 		<ion-header-bar class="bar-royal">
-			<h1 class="title">Eplweb app</h1>
+			<h1 class="title">Weekend Match</h1>
 		</ion-header-bar>
 		<ion-content>
 			<ion-list>
+<!-- 				<ion-item nav-clear menu-close>
+					<button 
+						ng-click="socialSignin('GOOGLE')"
+						class="btn btn-google-plus wm-signin-btn">
+						<i class="fa fa-google-plus"></i> | Connect with Google Plus
+					</button>
+				</ion-item> -->
+				<ion-item nav-clear menu-close ng-if="!loggedUser">
+					<button 
+						ng-click="socialSignin('FACEBOOK')"
+						class="btn btn-facebook wm-signin-btn">
+						<i class="fa fa-facebook"></i> | Connect with Facebook
+					</button>
+				</ion-item>
+				<ion-item nav-clear menu-close ng-if="loggedUser">
+					<img ng-src="{{loggedUser.imageUrl}}"/><br/>
+					{{loggedUser.firstName}} {{loggedUser.lastName}}<br/>
+					{{loggedUser.username}}<br/>
+					<br/>
+					<button 	
+						ng-click="vm.logout()"
+						class="button button-small button-royal">
+						Logout
+					</button>
+				</ion-item>
 				<ion-item nav-clear menu-close
 					ui-sref="app.home">
 					Home

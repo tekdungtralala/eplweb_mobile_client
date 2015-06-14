@@ -2,9 +2,10 @@
 	"use strict";
 
 	angular.module('app.home')
-		.controller('HomeCtrl', HomeCtrl);
+		.controller('HomeCtrl', HomeCtrl)
 
 	function HomeCtrl() {
-	};
+	};		
+
 	
 })();

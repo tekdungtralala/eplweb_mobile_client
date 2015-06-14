@@ -5,7 +5,8 @@
 	vertical-align: middle;
 }
 
-.epl-center {
+.epl-center ,
+.wm-center {
 	text-align: center;
 }
 
@@ -15,4 +16,19 @@
 
 .epl-matchday .firstelement {
 	padding-top: 40px;
+}
+
+.wm-signin-btn {
+	width: 100%;
+}
+
+.wm-nowrap {
+	white-space: normal;
+}
+
+.wm-errormsg {
+	background-color: #ef473a;
+	color: white;
+	padding-top: 7px;
+	padding-bottom: 7px;
 }
