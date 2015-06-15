@@ -28,8 +28,12 @@
 		}
 
 		function logout() {
+			if ("GOOGLE" === userhelper.get('type')) {
+				window.plugins.googleplus.logout();
+			}
 			$rootScope.loggedUser = false;
-			userhelper.remove('sesion');
+			userhelper.remove('session');
+			userhelper.remove('type');
 		}
 
 		function processData(result) {

@@ -31,6 +31,12 @@
 						class="btn btn-facebook wm-signin-btn">
 						<i class="fa fa-facebook"></i> | Connect with Facebook
 					</button>
+					<br/><br/>
+					<button 
+						ng-click="socialSignin('GOOGLE')"
+						class="btn btn-google-plus wm-signin-btn">
+						<i class="fa fa-google-plus"></i> | Connect with Google Plus
+					</button>
 				</ion-item>
 				<ion-item nav-clear menu-close ng-if="loggedUser">
 					<img ng-src="{{loggedUser.imageUrl}}"/><br/>

@@ -20,6 +20,7 @@
 		function saveUserLogged(data) {
 			$rootScope.loggedUser = data.userNetwork.user;
 			set('session', data.session);
+			set('type', data.userNetwork.type);
 			/*
 				data is json with structure below
 				id,loginTime,role(2),session,

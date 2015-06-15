@@ -12,7 +12,7 @@
 		ADDRESS_URL = "weekendmatch.info";
 		var API_URL = "http://" + ADDRESS_URL;
 
-		var fbData = {};
+		var userData = {};
 		var service = {
 			fetchPageData: fetchPageData,
 			fetchRanks: fetchRanks,
@@ -62,7 +62,31 @@
 		function socialMediaSignin(socialType) {
 			if ('FACEBOOK' === socialType) {
 				fbDoSignin();
+			} else if ('GOOGLE' === socialType) {
+				window.plugins.googleplus.login(
+					{ 'iOSApiKey': '6535513912-uvpf249ak7avodois85tkjmh2lc2j952.apps.googleusercontent.com'},
+					googleDoSignin,
+					function (msg) {
+						console.log("Error : ", msg);
+					}
+				);
 			}
+		}
+
+		function googleDoSignin() {
+			var userModel = {
+				"firstName" : result.givenName,
+				"lastName" : result.familyName,
+				"type" : "GOOGLE",
+				"userNetworkID" : result.userId,
+				"email" : result.email,
+				"imageUrl" : result.imageUrl
+			};
+			userData.userModel = userModel;
+
+			isRegisteredUser(result.email, "GOOGLE")
+				.then(checkRegisteredUser)
+				.catch(checkRegisteredUser);			
 		}
 
 		function fbDoSignin() {
@@ -70,27 +94,27 @@
 				fbGetProfilData,fbLoginError);
 		}
 		function fbGetProfilData(data) {
-			fbData.data1 = data;
+			userData.data1 = data;
 			facebookConnectPlugin.api( "/me", [], fbGetImageData, fbLoginError);
 		}
 		function fbGetImageData(data) {
-			fbData.data2 = data;
+			userData.data2 = data;
 			facebookConnectPlugin.api( "/me?fields=picture", [], 
 				fbSuccessLogin, fbSuccessLogin);
 		}
 		function fbSuccessLogin(data) {
-			fbData.data3 = data;
+			userData.data3 = data;
 			var userModel = {
-				"firstName" : fbData.data2.first_name,
-				"lastName" : fbData.data2.last_name,
+				"firstName" : userData.data2.first_name,
+				"lastName" : userData.data2.last_name,
 				"type" : "FACEBOOK",
-				"userNetworkID" : fbData.data2.id,
-				"email" : fbData.data2.email,
-				"imageUrl" : fbData.data3.picture.data.url
+				"userNetworkID" : userData.data2.id,
+				"email" : userData.data2.email,
+				"imageUrl" : userData.data3.picture.data.url
 			};
-			fbData.userModel = userModel;
+			userData.userModel = userModel;
 
-			isRegisteredUser(fbData.data2.email, "FACEBOOK")
+			isRegisteredUser(userData.data2.email, "FACEBOOK")
 				.then(checkRegisteredUser)
 				.catch(checkRegisteredUser);
 
@@ -118,21 +142,16 @@
 			showLoading();
 			return $http(req).then(getResult).catch(getResult);
 		}
-
-		function userSignIn(userModel) {
-			var req = generateReqObj('POST', '/api/usernetwork/signin', userModel);
-			showLoading();
-			return $http(req).then(getResult).catch(getResult);
-		}		
+	
 
 		function checkRegisteredUser(result) {
 			hideLoading();
 			if (404 === result.status) {		
-				var str = JSON.stringify(fbData.userModel);
+				var str = JSON.stringify(userData.userModel);
 				var um = encodeURIComponent(str);
 				$state.go('app.user.reg', {userModel: um});
 			} else {
-				userSignIn(fbData.userModel).then(afterSignin);
+				userSignIn(userData.userModel).then(afterSignin);
 			}
 		}
 
