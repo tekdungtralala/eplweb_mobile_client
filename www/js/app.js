@@ -3,6 +3,8 @@
 
 	angular.module('app', [
 		'ionic',
+		'chart.js',
+
 		'app.core',
 		'app.home',
 		'app.matchday',
@@ -35,7 +37,12 @@
 		
 	};
 
-	function configuration($stateProvider, $urlRouterProvider) {
+	function configuration($stateProvider, $urlRouterProvider, ChartJsProvider) {
+
+    ChartJsProvider.setOptions({
+      
+    });
+
 		// if none of the above states are matched, use this as the fallback
 		$urlRouterProvider.otherwise('/app/home');
 

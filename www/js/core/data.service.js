@@ -20,7 +20,9 @@
 			socialMediaSignin: socialMediaSignin,
 			isUsernameAvailable: isUsernameAvailable,
 			userSignIn: userSignIn,
-			me: me
+			me: me,
+			postRating: postRating,
+			postVoting: postVoting
 		};
 		return service;
 
@@ -36,7 +38,8 @@
 
 		function fetchMatchday(weekNumber) {
 			var path = "/api/matchday";
-			if (weekNumber) path = path + "/" + weekNumber;
+			if (weekNumber) path = path + "/" + weekNumber  ;
+			path = path + '?random=' + getRandomNmbr();
 			return submitRequest("GET", path);
 		}
 
@@ -73,7 +76,7 @@
 			}
 		}
 
-		function googleDoSignin() {
+		function googleDoSignin(result) {
 			var userModel = {
 				"firstName" : result.givenName,
 				"lastName" : result.familyName,
@@ -173,6 +176,20 @@
 			}
 		}
 
+		function postRating(matchdayId, rating) {
+			var o = {rating: rating};
+			var req = userhelper.getConf(o, "POST", generateUrl("/api/matchday/" + matchdayId + "/updateRating"));
+			showLoading();
+			return $http(req).then(getResult).catch(getResult);
+		}
+
+		function postVoting(matchdayId, value) {
+			var o = {vote: value};
+			var req = userhelper.getConf(o, "POST", generateUrl("/api/matchday/" + matchdayId + "/updateVoting"));
+			showLoading();
+			return $http(req).then(getResult).catch(getResult);
+		}
+
 		// hide and show loading
 		function showLoading() {
 			$ionicLoading.show({
@@ -182,10 +199,12 @@
 		function hideLoading() {
 			$ionicLoading.hide();
 		}
-
 		function getResult(result) {
 			hideLoading();
 			return result;
+		}
+		function getRandomNmbr() {
+			return Math.floor((Math.random() * 100) + 1);
 		}
 
 	}

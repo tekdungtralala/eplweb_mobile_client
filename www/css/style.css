@@ -5,16 +5,20 @@
 	vertical-align: middle;
 }
 
+.wm-team-logo-50 {
+	max-width: 50px;
+	max-height: 50px;
+	vertical-align: middle;
+}
+
 .epl-center ,
 .wm-center {
 	text-align: center;
 }
 
-.epl-ranks .firstelement {
-	padding-top: 40px;
-}
-
-.epl-matchday .firstelement {
+.epl-ranks .firstelement,
+.epl-matchday .firstelement,
+.wm-rating .firstelement{
 	padding-top: 40px;
 }
 
@@ -31,4 +35,9 @@
 	color: white;
 	padding-top: 7px;
 	padding-bottom: 7px;
+}
+
+.wm-rating .wm-vs {
+	padding: 20px;
+	font-size: 20px;
 }

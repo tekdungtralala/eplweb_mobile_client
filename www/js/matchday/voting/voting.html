@@ -1,0 +1,52 @@
+<ion-view view-title="Matchday" class="wm-rating">
+	<ion-content>
+		<div class="bar bar-header">
+			<h1 class="title">Which team will be win ?</h1>
+		</div>
+
+		<div class="firstelement"/>
+
+		<div class="row">
+			<div class="col col-33 wm-center">{{vm.match.homeTeam.name}}</div>
+			<div class="col col-33 wm-center"></div>
+			<div class="col col-33 wm-center">{{vm.match.awayTeam.name}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col col-33 wm-center">
+				<img class='wm-team-logo-50' alt='' ng-src='img/logo/150x150/{{vm.match.homeTeam.id}}.png' />
+			</div>
+			<div class="col col-33 wm-center wm-vs">
+				VS
+			</div>
+			<div class="col col-33 wm-center">
+				<img class='wm-team-logo-50' alt='' ng-src='img/logo/150x150/{{vm.match.awayTeam.id}}.png' />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col col-33 wm-center">
+				<button 
+					ng-click="vm.vote('HOME')"
+					class="button button-small button-positive">vote {{vm.match.homeTeam.simpleName}}</button>
+			</div>
+			<div class="col col-33 wm-center">
+				<button 
+					ng-click="vm.vote('TIE')"
+					class="button button-small button-positive">No one won</button>
+			</div>
+			<div class="col col-33 wm-center">
+				<button 
+					ng-click="vm.vote('AWAY')"
+					class="button button-small button-positive">vote {{vm.match.awayTeam.simpleName}}</button>
+			</div>
+		</div>
+		
+		<br/>
+		<div class="chart-container wm-center">
+			<canvas id="bar" class="chart chart-bar wm-center" 
+				data="vm.data" labels="vm.labels" options="vm.chartOptions"></canvas> 
+		</div>
+
+	</ion-content>
+</ion-view>

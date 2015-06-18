@@ -16,7 +16,7 @@
 				<div class="col">{{i}}</div>
 			</div>
 			<div class="row" ng-repeat="(j, r) in days">
-				<div class="col col-20 epl-center">{{r.time}})</div>
+				<div class="col col-20 epl-center">{{r.time}}</div>
 				<div class="col col-40 epl-center">
 					<img class='epl-team-logo' alt='' 
 						ng-src='img/logo/150x150/{{r.homeTeam.id}}.png' />
@@ -31,10 +31,14 @@
 				<div class="col col-40 epl-center">
 					<button class="button button-small button-calm icon ion-chatboxes" 
 					style="margin-right:5px"/> 
-					<button class="button button-small button-balanced icon ion-checkmark-circled"
-					style="margin-right:5px" /> 
-					<button class="button button-small button-energized icon ion-star" >
-						4.55
+					<button 
+						ng-click="vm.gotoVoting(r)"
+						class="button button-small button-balanced icon ion-checkmark-circled"
+						style="margin-right:5px" /> 
+					<button 
+						ng-click="vm.gotoRating(r)"
+						class="button button-small button-energized icon ion-star" >
+						{{r.ratingPointStr}}
 					</button>
 				</div>
 			</div>

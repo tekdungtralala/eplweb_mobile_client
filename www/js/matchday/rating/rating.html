@@ -1,0 +1,45 @@
+<ion-view view-title="Matchday" class="wm-rating">
+	<ion-content>
+		<div class="bar bar-header">
+			<h1 class="title">Select Rating</h1>
+		</div>
+
+		<div class="firstelement"/>
+
+		<div class="row">
+			<div class="col col-33 wm-center">{{vm.match.homeTeam.name}}</div>
+			<div class="col col-33 wm-center"></div>
+			<div class="col col-33 wm-center">{{vm.match.awayTeam.name}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col col-33 wm-center">
+				<img class='wm-team-logo-50' alt='' ng-src='img/logo/150x150/{{vm.match.homeTeam.id}}.png' />
+			</div>
+			<div class="col col-33 wm-center wm-vs">
+				VS
+			</div>
+			<div class="col col-33 wm-center">
+				<img class='wm-team-logo-50' alt='' ng-src='img/logo/150x150/{{vm.match.awayTeam.id}}.png' />
+			</div>
+		</div>
+
+		<div class="wm-center">
+			<a 
+				ng-click="vm.selectStar(1)"
+				class="button button-icon icon ion-ios-star{{vm.stars[0] ? '' : '-outline'}}"></a>
+			<a
+				ng-click="vm.selectStar(2)" 
+				class="button button-icon icon ion-ios-star{{vm.stars[1] ? '' : '-outline'}}"></a>
+			<a
+				ng-click="vm.selectStar(3)" 
+				class="button button-icon icon ion-ios-star{{vm.stars[2] ? '' : '-outline'}}"></a>
+			<a
+				ng-click="vm.selectStar(4)" 
+				class="button button-icon icon ion-ios-star{{vm.stars[3] ? '' : '-outline'}}"></a>
+			<a
+				ng-click="vm.selectStar(5)" 
+				class="button button-icon icon ion-ios-star{{vm.stars[4] ? '' : '-outline'}}"></a>
+		</div>
+	</ion-content>
+</ion-view>

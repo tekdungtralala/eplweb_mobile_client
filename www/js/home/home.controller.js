@@ -4,7 +4,10 @@
 	angular.module('app.home')
 		.controller('HomeCtrl', HomeCtrl)
 
-	function HomeCtrl() {
+	function HomeCtrl($ionicHistory) {
+		$ionicHistory.nextViewOptions({
+			disableBack: true
+		});
 	};		
 
 	
