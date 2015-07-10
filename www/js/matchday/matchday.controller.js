@@ -25,7 +25,6 @@
 				$state.go('app.voting', {match: matchStr});
 			} else {
 				$state.go('app.voting', {match: matchStr});
-				// showUnLoggedUserWarn();
 			}			
 		}
 

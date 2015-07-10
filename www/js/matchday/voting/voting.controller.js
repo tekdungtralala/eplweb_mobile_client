@@ -4,7 +4,7 @@
 	angular.module('app.matchday')
 		.controller('VotingCtrl', VotingCtrl);
 
-	function VotingCtrl($state, $stateParams, $ionicHistory, dataservice) {
+	function VotingCtrl($rootScope, $state, $stateParams, $ionicHistory, $ionicPopup, dataservice) {
 		var vm = this;
 		vm.match = null;
 
@@ -22,6 +22,13 @@
 			updateData();
 		}
 
+		function showUnLoggedUserWarn() {
+			$ionicPopup.alert({
+				title: 'Oops,,,',
+				template: "Hai there, you need to login before continuing."
+			});
+		}
+
 		function updateData() {
 			vm.labels = [
 				vm.match.homeTeam.simpleName + ' Win', 
@@ -34,7 +41,11 @@
 		}
 
 		function vote(value) {
-			dataservice.postVoting(vm.match.id, value).then(afterPost);
+			if (!$rootScope.loggedUser) {
+				showUnLoggedUserWarn();
+			} else {
+				dataservice.postVoting(vm.match.id, value).then(afterPost);
+			}
 		}
 
 		function afterPost(result) {
